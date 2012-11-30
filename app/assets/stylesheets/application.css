@@ -11,3 +11,16 @@
  *= require_self
  *= require_tree .
  */
+
+#user_nav {
+  overflow: auto;
+}
+
+#user_nav div.left {
+  float: left;
+}
+
+#user_nav div.right {
+  float: right;
+}
+
