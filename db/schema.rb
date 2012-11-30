@@ -26,9 +26,11 @@ ActiveRecord::Schema.define(:version => 20121130131200) do
     t.integer "post_id"
   end
 
+  add_index "games_posts", ["game_id", "post_id"], :name => "index_games_posts_on_game_id_and_post_id"
+  add_index "games_posts", ["post_id", "game_id"], :name => "index_games_posts_on_post_id_and_game_id"
+
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

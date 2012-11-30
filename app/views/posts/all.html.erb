@@ -1,10 +1,10 @@
-<h1>All posts</h1>
+<h1>Find games to play</h1>
 
 <% @posts.each do |post| %>
   <div class="post">
-    <% game = Game.find(post.game_id) %>
+    <% game = post.games.first %>
     <h1><%= link_to game.name, game.url %></h1>
-    <h2>Created by: <%= post.user.username %></h2>
+    <h2><%= post.user.username %> wants to play</h2>
     <% if post.user.id == session[:user_id] %>
       <%= button_to "Delete", :action => "destroy" %>
     <% end %>

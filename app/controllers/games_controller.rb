@@ -8,7 +8,7 @@ class GamesController < ApplicationController
       params[:game][:user] = User.find(session[:user_id])
       @game = Game.new(params[:game])
       if @game.save
-        redirect_to root_url, :notice => "Created " + @game.name
+        redirect_to posts_new_url :notice => "Created " + @game.name
       else
         render action: "new"
       end

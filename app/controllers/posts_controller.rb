@@ -8,7 +8,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(:user => User.find(session[:user_id]), :game_id => params[:post][:game_id])
+    @post = Post.new(:user => User.find(session[:user_id]))
+    @post.assign_game params[:post][:game]
 
     if @post.save
       redirect_to root_url, :notice => "Successfully created post!"
