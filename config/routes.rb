@@ -1,4 +1,11 @@
 CogsScreen::Application.routes.draw do
+  root :to => "posts#all"
+
+  get "posts/new"
+  get "posts/destroy"
+  get "posts/all"
+  resources :posts
+
   get "games/new"
   resources :games
 
@@ -8,7 +15,6 @@ CogsScreen::Application.routes.draw do
   resources :sessions
 
   get "signup" => "users#new", :as => "signup"
-  root :to => "users#new"
   resources :users
 
   # The priority is based upon order of creation:

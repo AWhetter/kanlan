@@ -1,0 +1,12 @@
+<h1>All posts</h1>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <% game = Game.find(post.game_id) %>
+    <h1><%= link_to game.name, game.url %></h1>
+    <h2>Created by: <%= post.user.username %></h2>
+    <% if post.user.id == session[:user_id] %>
+      <%= button_to "Delete", :action => "destroy" %>
+    <% end %>
+  </div>
+<% end %>

@@ -5,15 +5,16 @@ class GamesController < ApplicationController
 
   def create
     if session[:user_id]
+      params[:game][:user] = User.find(session[:user_id])
       @game = Game.new(params[:game])
       if @game.save
         redirect_to root_url, :notice => "Created " + @game.name
       else
-        render "new"
+        render action: "new"
       end
     else
       flash[:notice] = "Must be logged in!"
-      render "new"
+      render action: "new"
     end
   end
 end

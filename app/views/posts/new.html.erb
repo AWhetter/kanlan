@@ -1,0 +1,19 @@
+<h1>Create a new post</h1>
+
+<%= form_for @post do |f| %>
+  <% if @post.errors.any? %>
+    <div class="Error">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @post.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <%= f.label :game %>
+  <%= f.collection_select(:game_id, Game.find(:all, :order => "name"), :id, :name, :prompt => true) %>
+  </p>
+  <p class="button"><%= f.submit %></p>
+<% end %>
