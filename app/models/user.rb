@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   validates_uniqueness_of :username
 
+  has_many :games
+
   def encrypt_password
     if password.present?
       self.password_salt = BCrypt::Engine.generate_salt

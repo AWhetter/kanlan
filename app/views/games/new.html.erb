@@ -1,0 +1,28 @@
+<h1>Add new game</h1>
+
+<% if !@game %>
+  <% @game = Game.new %>
+<% end %>
+
+<%= form_for @game do |f| %>
+  <% if @game.errors.any? %>
+    <div class="Error">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @game.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+  <%= f.label:name %><br>
+  <%= f.text_field:name %>
+  </p>
+  <p>
+  <%= f.label:url %><br>
+  <%= f.text_field:url %>
+  </p>
+  <p class="button"><%= f.submit %></p>
+<% end %>

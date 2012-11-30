@@ -1,4 +1,7 @@
 CogsScreen::Application.routes.draw do
+  get "games/new"
+  resources :games
+
   get "logout" => "sessions#destroy", :as => "logout"
 
   get "login" => "sessions#new", :as => "login"
