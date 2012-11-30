@@ -15,5 +15,6 @@
   <%= f.label :game %>
   <%= f.collection_select(:game_id, Game.find(:all, :order => "name"), :id, :name, :prompt => true) %>
   </p>
+  <p><%= link_to "Add a new game", games_new_path %></p>
   <p class="button"><%= f.submit %></p>
 <% end %>
