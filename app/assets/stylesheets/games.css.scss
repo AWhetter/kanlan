@@ -1,3 +1,40 @@
-// Place all the styles related to the Games controller here.
+// Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.game {
+  border-style: solid;
+  border-color: grey;
+  border-width: 2px;
+  border-radius: 15px;
+  padding: 15px;
+  overflow: auto;
+  width: 45%;
+}
+
+.game h1 {
+  margin: 0.1em 0em;
+  font-family: 'Rambla', sans-serif;
+  font-weight: bold;
+  font-size: 1.7em;
+}
+
+.game h1 a {
+  text-decoration: none;
+}
+
+.game .user_listing {
+  clear: both;
+}
+
+.game .user_listing h2 {
+  margin: 0.1em 0em;
+  font-family: 'Rambla', sans-serif;
+  font-weight: normal;
+  font-size: 1.4em;
+  float: left;
+}
+
+.game .user_listing form {
+  float: right;
+}

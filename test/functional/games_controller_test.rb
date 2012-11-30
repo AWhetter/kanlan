@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
+  test "should get all" do
+    get :all
     assert_response :success
   end
 

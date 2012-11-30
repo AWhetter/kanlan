@@ -1,0 +1,17 @@
+<h1>Don't play with yourself!</h1>
+
+<% @games.each do |game| %>
+  <% if game.posts.size > 0 %>
+    <div class="game">
+      <h1><%= link_to game.name, game.url %></h1>
+      <% game.posts.each do |post| %>
+        <div class="user_listing">
+          <h2><%= post.user.username %> wants to play</h2>
+          <% if post.user.id == session[:user_id] %>
+            <%= button_to "Delete", {:controller => "posts", :action => "destroy", :id => post.id}, :confirm => "Are you sure?", :method => "delete" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -6,7 +6,7 @@
     <h1><%= link_to game.name, game.url %></h1>
     <h2><%= post.user.username %> wants to play</h2>
     <% if post.user.id == session[:user_id] %>
-      <%= button_to "Delete", :action => "destroy" %>
+      <%= button_to "Delete", { :action => "destroy", :id => post.id }, :confirm => "Are you sure?", :method => "delete" %>
     <% end %>
   </div>
 <% end %>

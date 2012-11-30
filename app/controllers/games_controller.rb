@@ -17,4 +17,8 @@ class GamesController < ApplicationController
       render action: "new"
     end
   end
+
+  def all
+    @games = Game.all
+  end
 end

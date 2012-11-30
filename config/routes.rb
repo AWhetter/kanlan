@@ -1,5 +1,7 @@
 CogsScreen::Application.routes.draw do
-  root :to => "posts#all"
+  get "games/all"
+
+  root :to => "games#all"
 
   get "posts/new"
   get "posts/destroy"
