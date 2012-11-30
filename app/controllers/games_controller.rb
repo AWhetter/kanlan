@@ -19,6 +19,6 @@ class GamesController < ApplicationController
   end
 
   def all
-    @games = Game.all
+    @games = Game.all.sort { |a,b| a.name <=> b.name }
   end
 end
