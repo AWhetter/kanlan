@@ -8,7 +8,7 @@
         <div class="user_listing">
           <h2><%= post.user.username %> wants to play</h2>
           <% if post.user.id == session[:user_id] %>
-            <%= button_to "Delete", {:controller => "posts", :action => "destroy", :id => post.id}, :confirm => "Are you sure?", :method => "delete" %>
+            <%= button_to "Delete", {:controller => "posts", :action => "destroy", :id => post.id}, :method => "delete", :remote => true, :form_class => "delete_post" %>
           <% end %>
         </div>
       <% end %>

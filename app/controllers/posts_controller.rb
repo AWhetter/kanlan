@@ -20,10 +20,14 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if Post.destroy(params[:id])
-      redirect_to root_url
-    else
-      flash[:notice] = "Something went wrong!"
+    respond_to do |format|
+      if Post.destroy(params[:id])
+        format.html { redirect_to root_url }
+        format.js { render :nothing => true }
+      else
+        format.html { flash[:notice] = "Something went wrong!" }
+        format.js
+      end
     end
   end
 end
