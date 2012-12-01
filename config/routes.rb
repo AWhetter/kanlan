@@ -1,4 +1,8 @@
 CogsScreen::Application.routes.draw do
+  if Rails.env.development?
+    get "dev/sha"
+  end
+
   get "games/all"
 
   root :to => "games#all"
