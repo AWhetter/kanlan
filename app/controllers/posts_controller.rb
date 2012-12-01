@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     if user.posts.size > 0
       user.posts.each do |post|
         if post.games == [game]
-          flash[:notice] = "You have already posted that game!"
+          flash.now[:notice] = "You have already posted that game!"
           render action: "new"
           return
         end
