@@ -12,4 +12,22 @@ class UsersController < ApplicationController
       render "new"
     end
   end
+
+  def edit
+    @user = User.find(session[:user_id])
+  end
+
+  def update
+    @user = User.find(session[:user_id])
+
+    if @user.password.blank?
+      params[:user].delete(:password)
+    end
+
+    if @user.update_attributes(params[:user])
+      redirect_to root_url, :notice => "Profile updated!"
+    else
+      render "edit"
+    end
+  end
 end

@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password
 
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
+  validates :password, :presence => true, :confirmation => true, :on => :create
+  validates :password, :presence => true, :confirmation => true, :on => :update, :unless => lambda{ |user| user.password.blank? }
   validates_presence_of :username
   validates_uniqueness_of :username
 

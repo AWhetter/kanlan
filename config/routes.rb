@@ -20,6 +20,7 @@ CogsScreen::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   resources :sessions
 
+  get "users/edit"
   get "signup" => "users#new", :as => "signup"
   resources :users
 
