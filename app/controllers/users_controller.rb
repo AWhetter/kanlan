@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(session[:user_id])
 
-    if @user.password.blank?
+    if params[:user][:password].blank?
       params[:user].delete(:password)
     end
 

@@ -5,8 +5,7 @@ class User < ActiveRecord::Base
 
   validates :password, :presence => true, :confirmation => true, :on => :create
   validates :password, :presence => true, :confirmation => true, :on => :update, :unless => lambda{ |user| user.password.blank? }
-  validates_presence_of :username
-  validates_uniqueness_of :username
+  validates :username, :presence => true, :uniqueness => true;
 
   has_many :posts
   has_many :games
