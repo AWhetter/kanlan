@@ -12,7 +12,7 @@ $(document).ready( ->
 
   $('.comment').hide()
 
-  $('.user_listing h2').bind('click', ->
+  $('.user_listing h2').bind('hover', ->
     toToggle = $(this).next()
     if toToggle.is(":visible")
       toToggle.hide()
