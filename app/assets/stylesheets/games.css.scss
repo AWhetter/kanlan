@@ -33,9 +33,17 @@
   font-family: 'Rambla', sans-serif;
   font-weight: normal;
   font-size: 1.4em;
-  float: left;
 }
 
 .game .user_listing form {
   float: right;
+}
+
+.game .user_listing div.comment {
+  font-family: 'Rambla', sans-serif;
+  font-style: italic;
+  font-size: 1em;
+  color: #787878;
+  float: left;
+  margin: 0em 0em 0em 0.5em;
 }

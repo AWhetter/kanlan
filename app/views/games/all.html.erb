@@ -6,10 +6,19 @@
       <h1><%= link_to game.name, game.url %></h1>
       <% game.posts.each do |post| %>
         <div class="user_listing">
-          <h2><%= post.user.username %> wants to play</h2>
           <% if post.user.id == session[:user_id] %>
             <%= button_to "Remove Request", {:controller => "posts", :action => "destroy", :id => post.id}, :method => "delete", :remote => true, :form_class => "delete_post", :confirm => "Are you sure?" %>
           <% end %>
+
+          <h2><%= post.user.username %> wants to play</h2>
+
+          <div class="comment">
+            <% if post.user.comment? %>
+              "<%= post.user.comment %>"
+            <% else %>
+              I don't know where <%= post.user.username %> is sat.
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
