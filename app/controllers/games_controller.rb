@@ -5,11 +5,16 @@ class GamesController < ApplicationController
 
   def create
     if session[:user_id]
-      @game = Game.new(params[:game])
-      if @game.save
-        redirect_to posts_new_url :notice => "Created " + @game.name
-      else
+      if Game.find_by_name(params[:game][:name]) != nil
+        flash.now[:notice] = "Game already exists!"
         render action: "new"
+      else
+        @game = Game.new(params[:game])
+        if @game.save
+          redirect_to posts_new_url :notice => "Created " + @game.name
+        else
+          render action: "new"
+        end
       end
     else
       flash[:notice] = "Must be registered!"
