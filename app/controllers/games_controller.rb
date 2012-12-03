@@ -10,6 +10,11 @@ class GamesController < ApplicationController
         render action: "new"
       else
         @game = Game.new(params[:game])
+
+        if !@game.url.start_with?("http")
+          @game.url = "http://" + @game.url
+        end
+
         if @game.save
           redirect_to posts_new_url :notice => "Created " + @game.name
         else
