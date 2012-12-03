@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:username], params[:password])
+    user = User.authenticate(params[:username], request.remote_ip.gsub('.', '').to_i)
     if user
       session[:user_id] = user.id
       redirect_to root_url, :notice => "Hello again, " + params[:username] + "!"

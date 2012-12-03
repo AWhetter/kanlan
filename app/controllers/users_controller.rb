@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    @user.id = request.remote_ip.gsub('.', '').to_i
   end
 
   def create
+    params[:user][:id] = request.remote_ip.gsub('.', '').to_i
     @user = User.new(params[:user])
-    if @user.save
+
+    if User.exists?(@user.id)
+      flash.now[:notice] = "You have already registered from this ip address"
+      render "new"
+    elsif @user.save
       session[:user_id] = @user.id
       redirect_to root_url, :notice => "Welcome, " + @user.username + "!"
     else
@@ -19,10 +25,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(session[:user_id])
-
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-    end
 
     if @user.update_attributes(params[:user])
       redirect_to root_url, :notice => "Profile updated!"

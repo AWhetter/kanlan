@@ -14,14 +14,6 @@
   <%= f.text_field :username, :value => @user.username %>
   </p>
   <p>
-  <%= f.label :password %><br>
-  <%= f.password_field :password %>
-  </p>
-  <p>
-  <%= f.label :password_confirmation %><br>
-  <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
   <%= f.label :comment, "Where are you sat and how can people contact you?" %><br>
   <%= f.text_field :comment, :value => @user.comment %>
   <%= link_to "Floor Plan", "https://docs.google.com/a/cogsbristol.co.uk/spreadsheet/ccc?key=0AhDXuYfaC1SWdGpPWjVZNHFrM0gtLWcycm14SVNHeVE", :target => "_blank" %>
