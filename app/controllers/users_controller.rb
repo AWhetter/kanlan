@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
-    @user.id = request.remote_ip.gsub('.', '').to_i
+    @user.ip = request.remote_ip
   end
 
   def create
-    params[:user][:id] = request.remote_ip.gsub('.', '').to_i
+    params[:user][:ip] = request.remote_ip
     @user = User.new(params[:user])
 
-    if User.exists?(@user.id)
+    if User.exists?(:ip => @user.ip)
       flash.now[:notice] = "You have already registered from this ip address"
       render "new"
     elsif @user.save

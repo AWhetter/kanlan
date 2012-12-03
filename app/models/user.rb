@@ -1,19 +1,15 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :comment, :id
+  attr_accessible :username, :comment, :ip
 
-  validates :id, :presence => true, :uniqueness => true
+  validates :ip, :presence => true, :uniqueness => true
   validates :username, :presence => true, :uniqueness => true
 
   has_many :posts
 
-  def self.authenticate(username, userid)
-    begin
-      user = User.find(userid)
-    rescue ActiveRecord::RecordNotFound
-      return nil
-    end
+  def self.authenticate(username, ip)
+    user = User.find_by_ip(ip)
 
-    if user.username == username
+    if user != nil and user.username == username
       user
     else
       nil
