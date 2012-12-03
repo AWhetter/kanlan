@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to root_url, :notice => "Successfully created post!"
     else
-      flash[:notice] = "Post not created!"
+      flash.now[:notice] = "Post not created!"
       render action: "new"
     end
   end

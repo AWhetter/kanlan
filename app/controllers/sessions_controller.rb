@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_url, :notice => "Hello again, " + params[:username] + "!"
     else
-      flash.now.alert = "Invalid username for this IP address!"
+      flash.now[:notice] = "Invalid username for this IP address!"
       render "new"
     end
   end

@@ -22,7 +22,7 @@ class GamesController < ApplicationController
         end
       end
     else
-      flash[:notice] = "Must be registered!"
+      flash.now[:notice] = "Must be registered!"
       render action: "new"
     end
   end
