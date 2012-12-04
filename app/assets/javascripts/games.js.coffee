@@ -12,8 +12,8 @@ $(document).ready( ->
 
   $('.comment').hide()
 
-  $('.user_listing h2').bind('hover', ->
-    toToggle = $(this).next()
+  $('.user_listing').bind('hover', ->
+    toToggle = $(this).children('.comment')
     if toToggle.is(":visible")
       toToggle.hide()
     else

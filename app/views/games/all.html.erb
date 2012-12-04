@@ -12,11 +12,15 @@
 
           <h2><%= post.user.username %> wants to play</h2>
 
-          <div class="comment">
+          <div class="user_info">
+            Table: <%= post.user.table %> | Seat: <%= post.user.seat %>
+          </div>
+
+          <div class="user_info comment">
             <% if post.user.comment? %>
               "<%= post.user.comment %>"
             <% else %>
-              I don't know where <%= post.user.username %> is sat.
+              I don't know how you can contact <%= post.user.username %>.
             <% end %>
           </div>
         </div>
