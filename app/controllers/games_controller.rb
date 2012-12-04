@@ -11,7 +11,7 @@ class GamesController < ApplicationController
       else
         @game = Game.new(params[:game])
 
-        if !@game.url.start_with?("http")
+        if @game.url? and !@game.url.start_with?("http")
           @game.url = "http://" + @game.url
         end
 
