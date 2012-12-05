@@ -14,15 +14,15 @@
   <%= f.text_field :username, :value => @user.username %>
   </p>
   <p>
-  <%= f.label :table %><%= f.select :table, ["Your Mum", "Strong Independent Black Woman", "Shiny"] %>
-  </p>
-  <p>
-  <%= f.label :seat %><%= f.select :seat, ["A1", "A2", "A3", "A4", "A5", "A6", "B1", "B2", "B3", "B4", "B5", "B6"] %>
+  Where are you sat?<br>
+  <%= f.label :table, "Table: " %><%= f.select :table, ["Your Mum", "Strong Independent Black Woman", "Shiny"] %>
+  <br>
+  <%= f.label :seat, "Seat: " %><%= f.select :seat, ["A1", "A2", "A3", "A4", "A5", "A6", "B1", "B2", "B3", "B4", "B5", "B6"] %>
+  <%= link_to "Floor Plan", "https://docs.google.com/a/cogsbristol.co.uk/spreadsheet/ccc?key=0AhDXuYfaC1SWdGpPWjVZNHFrM0gtLWcycm14SVNHeVE", :target => "_blank" %>
   </p>
   <p>
   <%= f.label :comment, "How else can people contact you?" %><br>
   <%= f.text_field :comment, :value => @user.comment %>
-  <%= link_to "Floor Plan", "https://docs.google.com/a/cogsbristol.co.uk/spreadsheet/ccc?key=0AhDXuYfaC1SWdGpPWjVZNHFrM0gtLWcycm14SVNHeVE", :target => "_blank" %>
   </p>
   <p class="button"><%= f.submit %></p>
 <% end %>
