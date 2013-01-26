@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     if User.exists?(:ip => @user.ip)
       flash.now[:notice] = "You have already registered from this ip address"
       render "new"
+    elsif SEATS[params[:user][:table]].include?(params[:user][:seat])
+      flash.now[:notice] = "Seat is not on selected table"
+      render "edit"
     elsif @user.save
       session[:user_id] = @user.id
       redirect_to root_url, :notice => "Welcome, " + @user.username + "!"
@@ -26,7 +29,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(session[:user_id])
 
-    if @user.update_attributes(params[:user])
+    if not SEATS[params[:user][:table]].include?(params[:user][:seat])
+      flash.now[:notice] = "Seat is not on selected table"
+      render "edit"
+    elsif @user.update_attributes(params[:user]) and
       redirect_to root_url, :notice => "Profile updated!"
     else
       render "edit"
