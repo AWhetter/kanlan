@@ -1,4 +1,6 @@
 CogsScreen::Application.routes.draw do
+  get "floor_plan/show"
+
   if Rails.env.development?
     get "dev/sha"
   end

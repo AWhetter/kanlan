@@ -1,0 +1,13 @@
+tables:
+  - {
+    name: Dull,
+    rows: [A, B],
+    tables: 5,
+    seats_per_table: 2
+    }
+  - {
+    name: Shiny,
+    rows: [A, B],
+    tables: 5,
+    seats_per_table: 2
+    }
