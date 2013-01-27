@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if not SEATS[params[:user][:table]].include?(params[:user][:seat])
       flash.now[:notice] = "Seat is not on selected table"
       render "edit"
-    elsif @user.update_attributes(params[:user]) and
+    elsif @user.update_attributes(params[:user])
       redirect_to root_url, :notice => "Profile updated!"
     else
       render "edit"
