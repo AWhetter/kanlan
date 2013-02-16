@@ -1,6 +1,6 @@
 tables:
   - {
-    name: Dull,
+    name: Kitty!,
     rows: [A, B],
     tables: 5,
     seats_per_table: 2
@@ -8,6 +8,6 @@ tables:
   - {
     name: Shiny,
     rows: [A, B],
-    tables: 5,
+    tables: 6,
     seats_per_table: 2
     }

@@ -15,9 +15,9 @@
   </p>
   <p>
   Where are you sat?<br>
-  <%= f.label :table, "Table: " %><%= f.select :table, ["Your Mum", "Strong Independent Black Woman", "Shiny"] %>
+  <%= f.label :table, "Table: " %><%= f.select :table, @tables %>
   <br>
-  <%= f.label :seat, "Seat: " %><%= f.select :seat, ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8"] %>
+  <%= f.label :seat, "Seat: " %><%= f.select :seat, @seats %>
   <%= link_to "Floor Plan", {:controller => "floor_plan", :action => "show"}, :target => "_blank"%>
   </p>
   <p>
