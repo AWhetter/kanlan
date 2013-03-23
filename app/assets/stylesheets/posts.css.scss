@@ -12,6 +12,10 @@
   width: 45%;
 }
 
+.post div.request {
+  overflow: hidden;
+}
+
 .post h1 {
   margin: 0.1em 0em;
   font-family: 'Rambla', sans-serif;
@@ -32,7 +36,7 @@
   margin: 0em 0em 0em 0.5em;
 }
 
-.post h3 {
+.post .request h3 {
   margin: 0.1em 0em;
   font-family: 'Rambla', sans-serif;
   font-weight: normal;
@@ -40,6 +44,6 @@
   float: left;
 }
 
-.post form {
+.post .request form {
   float: right;
 }

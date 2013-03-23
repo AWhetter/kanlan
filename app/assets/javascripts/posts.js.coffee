@@ -9,14 +9,4 @@ $(document).ready( ->
     if game.find('.request').length == 1
       game.fadeOut()
   )
-
-  $('.comment').hide()
-
-  $('.request').bind('hover', ->
-    toToggle = $(this).children('.comment')
-    if toToggle.is(":visible")
-      toToggle.hide()
-    else
-      toToggle.show()
-  )
 )
