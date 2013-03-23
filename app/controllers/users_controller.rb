@@ -43,6 +43,9 @@ class UsersController < ApplicationController
     elsif !SEATS[params[:user][:table]].include?(params[:user][:seat])
       flash.now[:notice] = "Seat is not on selected table"
       render "edit"
+    elsif !User.where(:table => params[:user][:table], :seat => params[:user][:seat]).empty?
+      flash.now[:notice] = "Someone else is sat there!"
+      render "edit"
     elsif @user.save
       session[:user_id] = @user.id
       redirect_to root_url, :notice => "Welcome, " + @user.username + "!"
@@ -58,8 +61,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(session[:user_id])
 
-    if not SEATS[params[:user][:table]].include?(params[:user][:seat])
+    if !SEATS[params[:user][:table]].include?(params[:user][:seat])
       flash.now[:notice] = "Seat is not on selected table"
+      render "edit"
+      return
+    end
+
+    users_in_seat = User.where(:table => params[:user][:table], :seat => params[:user][:seat])
+    if !users_in_seat.empty? and users_in_seat != [@user]
+      flash.now[:notice] = "Someone else is sat there!"
       render "edit"
     elsif @user.update_attributes(params[:user])
       redirect_to root_url, :notice => "Profile updated!"

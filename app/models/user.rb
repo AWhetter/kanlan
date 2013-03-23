@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
   attr_accessible :username, :comment, :ip, :table, :seat
 
-  validates :ip, :presence => true, :uniqueness => true
+  validates :ip, :presence => true
+  if Rails.env != "development"
+    validates :ip, :uniqueness => true
+  end
   validates :username, :presence => true, :uniqueness => true, :length => { :maximum => 20 }
   validates :table, :presence => true
   validates :seat, :presence => true
