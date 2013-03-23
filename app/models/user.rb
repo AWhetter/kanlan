@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   validates :table, :presence => true
   validates :seat, :presence => true
 
-  has_many :posts
+  has_many :games
+  has_and_belongs_to_many :posts
 
   def self.authenticate(username, ip)
     user = User.find_by_ip(ip)

@@ -1,12 +1,15 @@
 <h1>Don't play with yourself!</h1>
 
 <% @posts.each do |post| %>
-  <div class="post">
-    <% game = post.games.first %>
-    <h1><%= link_to game.name, game.url %></h1>
-    <h2><%= post.user.username %> wants to play</h2>
-    <% if post.user.id == session[:user_id] %>
-      <%= button_to "Delete", { :action => "destroy", :id => post.id }, :confirm => "Are you sure?", :method => "delete" %>
-    <% end %>
-  </div>
+  <% if !post.users.empty? %>
+    <div class="post">
+      <h1><%= link_to post.game.name, post.game.url %></h1>
+      <% post.users.each do |player| %>
+        <h2><%= player.username %> wants to play</h2>
+        <% if player.id == session[:user_id] %>
+          <%= button_to "Delete", { :action => "del_user", :id => post.id, :user_id => player.id }, :confirm => "Are you sure?", :method => "delete" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

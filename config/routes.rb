@@ -5,13 +5,13 @@ CogsScreen::Application.routes.draw do
     get "dev/sha"
   end
 
-  get "games/all"
+  root :to => "posts#all"
 
-  root :to => "games#all"
-
+  get "posts" => "posts#all"
   get "posts/new"
   get "posts/destroy"
   get "posts/all"
+  delete "posts/del_user"
   resources :posts
 
   get "games/new"

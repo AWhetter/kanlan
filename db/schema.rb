@@ -11,33 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204113338) do
+ActiveRecord::Schema.define(:version => 20130322202647) do
 
   create_table "games", :force => true do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "games_posts", :id => false, :force => true do |t|
-    t.integer "game_id"
-    t.integer "post_id"
-  end
-
-  add_index "games_posts", ["game_id", "post_id"], :name => "index_games_posts_on_game_id_and_post_id"
-  add_index "games_posts", ["post_id", "game_id"], :name => "index_games_posts_on_post_id_and_game_id"
-
-  create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "username"
+  create_table "posts", :force => true do |t|
+    t.integer  "game_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "posts_users", :id => false, :force => true do |t|
+    t.integer "post_id", :null => false
+    t.integer "user_id", :null => false
+  end
+
+  add_index "posts_users", ["post_id", "user_id"], :name => "index_posts_users_on_post_id_and_user_id", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.text     "comment"
     t.string   "ip"
     t.string   "table"

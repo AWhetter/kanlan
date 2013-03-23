@@ -4,7 +4,8 @@ class Game < ActiveRecord::Base
   validates :name, :presence => true, :length => { :maximum => 40 }
   validates :url, :length => { :maximum => 200 }
 
-  has_and_belongs_to_many :posts
+  has_many :posts
+  belongs_to :user
 
   def this
     self
