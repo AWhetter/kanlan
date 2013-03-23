@@ -4,8 +4,11 @@
   <% if !post.users.empty? %>
     <div class="post">
       <h1><%= link_to post.game.name, post.game.url %></h1>
+      <% if !post.params.nil? %>
+        <h2><%= post.params %></h2>
+      <% end %>
       <% post.users.each do |player| %>
-        <h2><%= player.username %> wants to play</h2>
+        <h3><%= player.username %> wants to play</h3>
         <% if player.id == session[:user_id] %>
           <%= button_to "Delete", { :action => "del_user", :id => post.id, :user_id => player.id }, :confirm => "Are you sure?", :method => "delete" %>
         <% end %>

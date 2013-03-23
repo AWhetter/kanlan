@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322202647) do
+ActiveRecord::Schema.define(:version => 20130323104808) do
 
   create_table "games", :force => true do |t|
     t.string   "name"
@@ -23,8 +23,9 @@ ActiveRecord::Schema.define(:version => 20130322202647) do
 
   create_table "posts", :force => true do |t|
     t.integer  "game_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.string   "params",     :limit => 80
   end
 
   create_table "posts_users", :id => false, :force => true do |t|

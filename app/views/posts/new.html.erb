@@ -15,6 +15,10 @@
   <%= f.label :game %>
   <%= f.collection_select(:game, Game.find(:all, :order => "name"), :id, :name, :prompt => true) %>
   </p>
+  <p>
+  <%= f.label :params, "Game Parameters" %>
+  <%= f.text_field :params, :placeholder => "eg GunGame on cs_office" %>
+  </p>
   <p><%= link_to "Add a new game", games_new_path %></p>
   <p class="button"><%= f.submit %></p>
 <% end %>

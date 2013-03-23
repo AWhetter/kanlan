@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def all
-    @posts = Post.all
+    @posts = Post.all.sort {|x,y| x.game.name <=> y.game.name}
   end
 
   def new
@@ -10,10 +10,10 @@ class PostsController < ApplicationController
   def create
     user = User.find(session[:user_id])
     game = Game.find(params[:post][:game])
-    @post = Post.where(:game_id => game.id).first
+    @post = Post.where(:game_id => game.id, :params => params[:post][:params]).first
 
     if @post.nil?
-      @post = Post.new(:game => game)
+      @post = Post.new(:game => game, :params => params[:post][:params])
     else
       if @post.users.include? user
         redirect_to new_post_path, :notice => "You have already requested that game!"
