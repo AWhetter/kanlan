@@ -7,8 +7,7 @@ Getting Started
 Before running the server you'll need to configure the floor plan.
 This is done in config/floor_plan.yml.
 2 example sets of tables are provided.
-Currently only parallel table rows are configurable and perpendicular tables at
-the end of rows are not supported.
+Only parallel table rows are configurable.
 
 After you've done that you can setup and start the server.
 
