@@ -6,9 +6,18 @@ class UsersController < ApplicationController
     @seats = []
     TABLES.each do |table|
       @tables << table["name"]
+
+      extras = 0
+      if END_TABLES[table["name"]].include? "L"
+        extras += 1
+      end
+      if END_TABLES[table["name"]].include? "R"
+        extras += 1
+      end
+
       table["rows"].each do |row|
         for j in 1..table["tables"]
-          for i in 1..table["seats_per_table"]
+          for i in 1..table["seats_per_table"] + extras
             seat_name = row + ((j-1)*table["seats_per_table"] + (i-1)).to_s
             if !@seats.include? seat_name
               @seats << seat_name

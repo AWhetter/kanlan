@@ -4,11 +4,30 @@
     <table class="tables" id="<%=table["name"]%>">
       <% table["rows"].each do |row| %>
         <tr>
+          <!-- Left End Table -->
+          <% if END_TABLES[table["name"]].include? "L" %>
+            <td class="end_table" style="width:<%= @longest_name %>em">
+              <div class="seat" style="width: 100%">
+                <% seat_name = row + "0" %>
+                <% user = User.where(:table => table["name"], :seat => seat_name).first %>
+                <% if !user.nil? %>
+                  <%= user.username %>
+                <% else %>
+                  <%= seat_name %>
+                <% end %>
+              </div>
+
+            </td>
+          <% end %>
+
+          <!-- Main Tables -->
           <% for j in 1..table["tables"] %>
             <td class="table" style="width:<%= @longest_name * table["seats_per_table"] %>em">
               <% for i in 1..table["seats_per_table"] %>
                 <div class="seat" style="width:<%= 100 / table["seats_per_table"] %>%">
-                  <% seat_name = row + ((j-1)*table["seats_per_table"] + (i-1)).to_s %>
+                  <% seat_num = (j-1)*table["seats_per_table"] + (i-1) %>
+                  <% seat_num += 1 if END_TABLES[table["name"]].include? "L" %>
+                  <% seat_name = row + seat_num.to_s %>
                   <% user = User.where(:table => table["name"], :seat => seat_name).first %>
                   <% if !user.nil? %>
                     <%= user.username %>
@@ -17,6 +36,24 @@
                   <% end %>
                 </div>
               <% end %>
+            </td>
+          <% end %>
+
+          <!-- Right End Table -->
+          <% if END_TABLES[table["name"]].include? "R" %>
+            <td class="end_table" style="width:<%= @longest_name %>em">
+              <div class="seat" style="width: 100%">
+                <% seat_num = table["tables"]*table["seats_per_table"] %>
+                <% seat_num += 1 if END_TABLES[table["name"]].include? "L" %>
+                <% seat_name = row + seat_num.to_s %>
+                <% user = User.where(:table => table["name"], :seat => seat_name).first %>
+
+                <% if !user.nil? %>
+                  <%= user.username %>
+                <% else %>
+                  <%= seat_name %>
+                <% end %>
+              </div>
             </td>
           <% end %>
         </tr>

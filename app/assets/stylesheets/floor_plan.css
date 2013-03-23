@@ -35,3 +35,11 @@ div.seat {
   float: left;
   overflow: hidden;
 }
+
+table:first-child.end_table {
+  border: none;
+}
+
+table:last-child.end_table {
+  border: none;
+}

@@ -3,7 +3,9 @@ tables:
     name: Kitty!,
     rows: [A, B],
     tables: 5,
-    seats_per_table: 2
+    seats_per_table: 2,
+    left_end_table: true,
+    right_end_table: true
     }
   - {
     name: Shiny,
