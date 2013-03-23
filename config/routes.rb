@@ -11,6 +11,7 @@ CogsScreen::Application.routes.draw do
   get "posts/new"
   get "posts/destroy"
   get "posts/all"
+  post "posts/add_user"
   delete "posts/del_user"
   resources :posts
 

@@ -41,6 +41,21 @@ class PostsController < ApplicationController
     end
   end
 
+  def add_user
+    @post = Post.find(params[:post_id])
+    user = User.find(session[:user_id])
+    respond_to do |format|
+      if !@post.users.include? user
+        @post.users << user
+        format.html { redirect_to root_url }
+        format.js { render :nothing => true }
+      else
+        format.html { flash[:notice] = "You have already requested this game!" }
+        format.js
+      end
+    end
+  end
+
   def del_user
     respond_to do |format|
       if Post.find(params[:id]).users.delete(User.find(session[:user_id]))

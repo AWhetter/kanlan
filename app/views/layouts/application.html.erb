@@ -14,7 +14,7 @@
       <div class="left">
         <%= link_to "Home", root_url %>
         <% if current_user %>
-          <%= link_to "Create Request", posts_new_path %>
+          <%= link_to "Create Post", posts_new_path %>
         <% else %>
           <%= link_to "Signup", signup_path %>
           <%= link_to "Login", login_path %>
