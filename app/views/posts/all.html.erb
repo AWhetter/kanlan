@@ -8,10 +8,12 @@
         <h2><%= post.params %></h2>
       <% end %>
       <% post.users.each do |player| %>
-        <h3><%= player.username %> wants to play</h3>
-        <% if player.id == session[:user_id] %>
-          <%= button_to "Delete", { :action => "del_user", :id => post.id, :user_id => player.id }, :confirm => "Are you sure?", :method => "delete" %>
-        <% end %>
+        <div class="request">
+          <h3><%= player.username %> wants to play</h3>
+          <% if player.id == session[:user_id] %>
+            <%= button_to "Delete", { :action => "del_user", :id => post.id, :user_id => player.id }, :remote => true, :form_class => "delete_request", :confirm => "Are you sure?", :method => "delete" %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>
