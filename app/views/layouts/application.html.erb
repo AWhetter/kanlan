@@ -1,40 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>COGS Now Playing Board</title>
-    <link rel="shortcut icon" href="#" />
-    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Rambla:400,700,400italic' %>
-    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Strait' %>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <div id="user_nav">
-      <div class="left">
-        <%= link_to "Home", root_url %>
-        <% if current_user %>
-          <%= link_to "Create Post", posts_new_path %>
-        <% else %>
-          <%= link_to "Signup", signup_path %>
-          <%= link_to "Login", login_path %>
-        <% end %>
-      </div>
+<head>
+  <title>KanLan</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
 
-      <div class="right">
-        <% if current_user %>
-          Logged in as <%= current_user.username %>
-          <%= link_to "Edit Profile", users_edit_path %>
-          <%= link_to "Logout", logout_path %>
-        <% end %>
-      </div>
-    </div>
+<%= yield %>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, :id => "flash_#{name}" %>
-    <% end %>
-
-    <%= yield %>
-
-  </body>
+</body>
 </html>
