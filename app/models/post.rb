@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  validates :game, :presence => true
   belongs_to :game
 
   def <=>(other)

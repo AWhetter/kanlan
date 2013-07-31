@@ -5,6 +5,11 @@ describe Post do
   let(:post2) { FactoryGirl.build(:post) }
 
   it { should respond_to :game }
+  it "should fail validation without a game" do
+    post =  FactoryGirl.build(:post, :game => nil)
+    expect(post).to_not be_valid
+  end
+
   it { should respond_to :params }
 
   it { should respond_to :<=> }
