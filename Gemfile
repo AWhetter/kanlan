@@ -48,4 +48,6 @@ group :development, :test do
   %w[rspec rspec-core rspec-expectations rspec-mocks rspec-rails].each do |lib|
     gem lib, :git => "git://github.com/rspec/#{lib}.git"
   end
+
+  gem 'factory_girl_rails', '~> 4.0'
 end
