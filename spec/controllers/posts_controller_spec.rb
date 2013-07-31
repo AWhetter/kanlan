@@ -2,12 +2,25 @@ require 'spec_helper'
 
 describe PostsController do
   describe "index endpoint" do
-    context "having no posts" do
-      it "returns an empty list of posts"
+    context "with no posts" do
+      it "puts an empty list of posts into @posts" do
+        get :index
+        expect(assigns(:posts)).to be_empty
+      end
     end
 
-    context "having some posts" do
-      it "returns the posts as a sorted list"
+    context "with some posts" do
+      before do
+        game = FactoryGirl.create(:game, :name => "Be like Ruby")
+        FactoryGirl.create(:post, :game => game)
+        game = FactoryGirl.create(:game, :name => "A game")
+        FactoryGirl.create(:post, :game => game)
+      end
+
+      it "puts a list of posts into @posts sorted by game name" do
+        get :index
+        expect(assigns(:posts)).to match_array(Post.all.sort)
+      end
     end
   end
 
