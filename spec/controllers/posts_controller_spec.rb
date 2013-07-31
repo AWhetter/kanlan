@@ -25,7 +25,10 @@ describe PostsController do
   end
 
   describe "new endpoint" do
-    it "returns success"
+    it "returns success" do
+      get :new
+      expect(response).to be_successful
+    end
   end
 
   describe "create endpoint" do
