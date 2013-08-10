@@ -11,6 +11,23 @@ describe Post do
   end
 
   it { should respond_to :params }
+  context "with the same game" do
+    before(:each) { post1.save }
+
+    context "and same params" do
+      it "should fail validation" do
+        expect(post1.dup).to be_invalid
+      end
+    end
+
+    context "but different params" do
+      it "should pass validation" do
+        new_post = post1.dup
+        new_post.params = "#{post1.params} extra"
+        expect(new_post).to be_valid
+      end
+    end
+  end
 
   it { should respond_to :<=> }
   it "is sorted by it's game" do

@@ -1,4 +1,5 @@
 KanLan::Application.routes.draw do
+  root 'posts#index'
   resources :games, :only => [:new, :create]
   resources :posts, :only => [:index, :new, :create] do
     post 'add_user'

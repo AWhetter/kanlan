@@ -32,8 +32,61 @@ describe PostsController do
   end
 
   describe "create endpoint" do
-    it "creates a new post"
-    it "does not create a new post if a similar one already exists"
+    let(:new_post) do
+      game = FactoryGirl.create(:game)
+      FactoryGirl.attributes_for(:post, :game => game).merge(:game_id => game.id)
+    end
+
+    context "with an invalid new post" do
+      let!(:old_count) do
+        post_obj = Post.new(new_post)
+        expect(post_obj.save).to be true
+        expect(post_obj).to_not be_new_record
+
+        Post.count
+      end
+
+      before do
+        post :create, :post => new_post
+      end
+
+      it "does not create the post" do
+        post_obj = Post.new(new_post)
+        post_obj.save.should be false
+        expect(Post.count).to eq(old_count)
+      end
+
+      it "redirects to creating a new post" do
+        response.should redirect_to(new_post_path)
+      end
+
+      it "returns an error" do
+        expect(flash[:error]).to_not be nil
+      end
+
+      it "gives a useful error message depending on the parameters given"
+    end
+
+    context "with a valid new post" do
+      let!(:old_count) { Post.count }
+      before do
+        post :create, :post => new_post
+      end
+
+      it "creates the post" do
+        post_obj = Post.new(new_post)
+        expect(post_obj.save).to be false
+        expect(Post.count).to eq(old_count + 1)
+      end
+
+      it "redirects to the home page" do
+        expect(response).to redirect_to(root_url)
+      end
+
+      it "returns a status message" do
+        expect(flash[:notice]).to_not be nil
+      end
+    end
   end
 
   describe "add_user endpoint" do
