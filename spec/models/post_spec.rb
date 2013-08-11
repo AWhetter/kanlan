@@ -12,7 +12,7 @@ describe Post do
 
   it { should respond_to :params }
   context "with the same game" do
-    before(:each) { post1.save }
+    before { post1.save }
 
     context "and same params" do
       it "should fail validation" do
