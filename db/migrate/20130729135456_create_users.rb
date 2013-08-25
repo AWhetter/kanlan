@@ -3,8 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :username
       t.string :ip
-      t.string :table
-      t.string :seat
+      t.references :seat, index: true
 
       t.timestamps
     end

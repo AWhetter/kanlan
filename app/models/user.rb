@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  belongs_to :seat
+
   private
   def ip
     self[:ip]
