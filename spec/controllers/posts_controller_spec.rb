@@ -96,7 +96,14 @@ describe PostsController do
     end
 
     context "having valid attributes" do
-      it "adds a user to the post"
+      context "and is already in the post" do
+        it "does not raise an error"
+        it "does not change the users"
+      end
+
+      context "and is not already in the post" do
+        it "adds a user to the post"
+      end
     end
   end
 

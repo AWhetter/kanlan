@@ -5,5 +5,6 @@ FactoryGirl.define do
     username "ATestUser"
     ip "127.0.0.1"
     seat
+    posts []
   end
 end

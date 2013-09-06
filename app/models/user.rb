@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :seat
+  has_and_belongs_to_many :posts, -> { where uniq: true }, :before_add => :validates_post
 
   validates_uniqueness_of :ip
   validates_presence_of :seat
@@ -11,11 +12,7 @@ class User < ActiveRecord::Base
   end
 
   private
-  def ip
-    self[:ip]
-  end
-
-  def ip=(val)
-    write_attribute :ip, val
+  def validates_posts(post)
+    raise ActiveRecord::Rollback if self.posts.include? post
   end
 end
