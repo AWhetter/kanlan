@@ -77,4 +77,10 @@ describe UsersController do
     end
   end
 
+  describe "edit endpoint" do
+    it "returns success" do
+      get :new
+      expect(response).to be_successful
+    end
+  end
 end

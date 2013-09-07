@@ -52,12 +52,12 @@ describe PostsController do
 
       it "does not create the post" do
         post_obj = Post.new(new_post)
-        post_obj.save.should be false
+        expect(post_obj.save).to be false
         expect(Post.count).to eq(old_count)
       end
 
       it "redirects to creating a new post" do
-        response.should redirect_to(new_post_path)
+        expect(response).to redirect_to(new_post_path)
       end
 
       it "returns an error" do

@@ -15,6 +15,9 @@ class UsersController < ApplicationController
   def new
   end
 
+  def edit
+  end
+
   private
   def user_params
     params[:user][:ip] = request.remote_ip
