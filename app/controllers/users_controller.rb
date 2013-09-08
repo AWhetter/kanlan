@@ -18,6 +18,25 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def update
+    begin
+      user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      reset_session
+      flash[:error] = "Invalid user logged in!"
+      redirect_to new_user_path
+      return
+    end
+
+    if user.update_attributes(user_params)
+      flash[:notice] = "Profile updated!"
+      redirect_to root_url
+    else
+      flash[:error] = "Profile not updated!"
+      redirect_to edit_user_path
+    end
+  end
+
   private
   def user_params
     params[:user][:ip] = request.remote_ip
