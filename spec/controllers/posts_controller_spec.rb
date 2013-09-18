@@ -146,12 +146,56 @@ describe PostsController do
 
   describe "del_user endpoint" do
     context "having invalid attributes" do
-      it "does not delete a user from a post"
-      it "does not change the user"
+      let!(:user) { FactoryGirl.create(:user) }
+      let!(:a_post) { FactoryGirl.create(:post) }
+      let!(:old_users) { a_post.users }
+
+      before do
+        session[:user_id] = -1
+        post :del_user, :post_id => a_post.id
+      end
+
+      it "does not delete a user from a post" do
+        expect(a_post.users).to match_array(old_users)
+      end
     end
 
     context "having valid attributes" do
-      it "deletes a user from the post"
+      context "and is not already in the post" do
+        let!(:user) { FactoryGirl.create(:user) }
+        let!(:a_post) { FactoryGirl.create(:post) }
+        let!(:old_users) { a_post.users }
+
+        before do
+          expect(a_post.users.include? user).to be false
+          session[:user_id] = user.id
+          post :del_user, :post_id => a_post.id
+        end
+
+        it "does not raise an error" do
+          expect(response.status).to_not eq(500)
+        end
+
+        it "does not change the users" do
+          expect(a_post.users).to match_array(old_users)
+        end
+      end
+
+      context "and is already in the post" do
+        let!(:user) { FactoryGirl.create(:user) }
+        let!(:a_post) { FactoryGirl.create(:post, :users => [user]) }
+        let!(:old_users) { a_post.users }
+
+        before do
+          session[:user_id] = user.id
+          post :del_user, :post_id => a_post.id
+        end
+
+        it "deletes a user from the post" do
+          updated_post = Post.find(a_post.id)
+          expect(updated_post.users.include? user).to be_falsey
+        end
+      end
     end
   end
 end

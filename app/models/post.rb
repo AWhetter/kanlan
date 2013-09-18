@@ -13,6 +13,10 @@ class Post < ActiveRecord::Base
     self.users << user
   end
 
+  def del_user(user)
+    self.users.delete(user)
+  end
+
   private
   def validates_user(user)
     raise ActiveRecord::Rollback if self.users.include? user

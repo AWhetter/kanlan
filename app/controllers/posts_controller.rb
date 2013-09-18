@@ -42,6 +42,28 @@ class PostsController < ApplicationController
   end
 
   def del_user
+    begin
+      user = User.find(session[:user_id])
+    rescue ActiveRecord::RecordNotFound
+      reset_session
+      flash[:error] = "Invalid user logged in!"
+      redirect_to root_url
+      return
+    end
+
+    begin
+      post = Post.find(params[:post_id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Invalid post!"
+      return
+    end
+
+    post.del_user user
+    if post.save
+      flash[:notice] = "Removed user from the post!"
+    else
+      flash[:error] = "User was not removed from the post!"
+    end
   end
 
   private
