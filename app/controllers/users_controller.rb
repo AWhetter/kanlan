@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      session[:user_id] = user.id
+      log_in_user user.id
       flash[:notice] = "Welcome, #{user.username}!"
       redirect_to root_url
     else
@@ -19,14 +19,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    begin
-      user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      reset_session
-      flash[:error] = "Invalid user logged in!"
-      redirect_to new_user_path
-      return
-    end
+    user = validate_user(params[:id], new_user_path)
+    return if user.nil?
 
     if user.update_attributes(user_params)
       flash[:notice] = "Profile updated!"

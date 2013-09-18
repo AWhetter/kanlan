@@ -17,14 +17,8 @@ class PostsController < ApplicationController
   end
 
   def add_user
-    begin
-      user = User.find(session[:user_id])
-    rescue ActiveRecord::RecordNotFound
-      reset_session
-      flash[:error] = "Invalid user logged in!"
-      redirect_to root_url
-      return
-    end
+    user = validate_logged_in_user(root_url)
+    return if user.nil?
 
     begin
       post = Post.find(params[:post_id])
@@ -42,14 +36,8 @@ class PostsController < ApplicationController
   end
 
   def del_user
-    begin
-      user = User.find(session[:user_id])
-    rescue ActiveRecord::RecordNotFound
-      reset_session
-      flash[:error] = "Invalid user logged in!"
-      redirect_to root_url
-      return
-    end
+    user = validate_logged_in_user(root_url)
+    return if user.nil?
 
     begin
       post = Post.find(params[:post_id])
