@@ -91,18 +91,55 @@ describe PostsController do
 
   describe "add_user endpoint" do
     context "having invalid attributes" do
-      it "does not add a user to a post"
-      it "does not change the user"
+      let!(:user) { FactoryGirl.create(:user) }
+      let!(:a_post) { FactoryGirl.create(:post) }
+      let!(:old_users) { a_post.users }
+
+      before do
+        session[:user_id] = -1
+        post :add_user, :post_id => a_post.id
+      end
+
+      it "does not add a user to a post" do
+        expect(a_post.users).to match_array(old_users)
+      end
     end
 
     context "having valid attributes" do
       context "and is already in the post" do
-        it "does not raise an error"
-        it "does not change the users"
+        let!(:user) { FactoryGirl.create(:user) }
+        let!(:a_post) { FactoryGirl.create(:post, :users => [user]) }
+        let!(:old_users) { a_post.users }
+
+        before do
+          session[:user_id] = user.id
+          post :add_user, :post_id => a_post.id
+        end
+
+        it "does not raise an error" do
+          expect(response.status).to_not eq(500)
+        end
+
+        it "does not change the users" do
+          expect(a_post.users).to match_array(old_users)
+        end
       end
 
       context "and is not already in the post" do
-        it "adds a user to the post"
+        let!(:user) { FactoryGirl.create(:user) }
+        let!(:a_post) { FactoryGirl.create(:post) }
+        let!(:old_users) { a_post.users }
+
+        before do
+          expect(a_post.users.include? user).to be false
+          session[:user_id] = user.id
+          post :add_user, :post_id => a_post.id
+        end
+
+        it "adds a user to the post" do
+          updated_post = Post.find(a_post.id)
+          expect(updated_post.users.include? user).to be_truthy
+        end
       end
     end
   end
