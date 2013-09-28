@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  helper_method :current_user
+
   def log_in_user(user_id)
     session[:user_id] = user_id
   end
@@ -24,5 +26,10 @@ class ApplicationController < ActionController::Base
       redirect_to redirect_url
       return nil
     end
+  end
+
+  private
+  def current_user
+    @current_user ||= validate_logged_in_user(root_url) if session[:user_id]
   end
 end

@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
     (other.is_a? User) and (self.username == other.username)
   end
 
+  def authenticate?(ip)
+    self.ip == ip
+  end
+
   private
   def validates_posts(post)
     raise ActiveRecord::Rollback if self.posts.include? post

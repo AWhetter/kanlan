@@ -53,4 +53,20 @@ describe User do
       expect(FactoryGirl.build(:user, :ip => "192.168.0.1")).to eq(user)
     end
   end
+
+  it { should respond_to :authenticate? }
+  describe "authenticate method" do
+    let(:user) { FactoryGirl.build(:user) }
+
+    it "should return falsey if the ip address is not the same" do
+      user = FactoryGirl.build(:user, :ip => "0.0.0.0")
+      expect(user.authenticate? "127.0.0.1").to be_falsey
+    end
+
+    it "should return truthy if the ip address is the same" do
+      ip = "127.0.0.1"
+      user = FactoryGirl.build(:user, :ip => ip)
+      expect(user.authenticate? ip).to be_truthy
+    end
+  end
 end

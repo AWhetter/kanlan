@@ -1,5 +1,12 @@
 KanLan::Application.routes.draw do
   root 'posts#index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete ' logout' => :destroy
+  end
+
   resources :users, :except => [:destroy, :show]
   resources :games, :only => [:new, :create]
   resources :posts, :only => [:index, :new, :create] do
