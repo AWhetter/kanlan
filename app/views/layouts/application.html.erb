@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KanLan</title>
+  <title>KanLan Request Board</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Economica' %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div id="titleBox">
+  <h1>KanLan Request Board</h1>
+  <h2>Don't play with yourself!</h2>
+</div>
 
-<%= yield %>
+<div id="navbar">
+  <div class="left">
+    <%= link_to "Home", root_url %>
+    <% if current_user %>
+      <%= link_to "Create Request", new_post_path %>
+    <% else %>
+      <%= link_to "Signup", new_user_path %>
+      <%= link_to "Login", login_path %>
+    <% end %>
+  </div>
+
+  <div class="right">
+    <% if current_user %>
+      Logged in as <%= current_user.username %>
+      <%= link_to "Edit Profile", edit_user_path %>
+      <%= link_to "Logout", logout_path %>
+    <% end %>
+  </div>
+</div>
+
+<div id="content_area">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, id: "notice_#{name}", class: "notice" %>
+  <% end %>
+
+  <%= yield %>
+</div>
 
 </body>
 </html>

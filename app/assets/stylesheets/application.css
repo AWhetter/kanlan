@@ -1,13 +1,54 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require_tree .
- */
+body {
+  max-width: 63em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#titleBox h1 {
+  font-family: 'Economica', sans-serif;
+  font-size: 2em;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0.5em 0px 0px 0px;
+}
+
+#titleBox h2 {
+  color: #5E5C5C;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  font-size: 0.9em;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  text-transform: capitalize;
+  margin: 0.5em 0px 1.3em 0px;
+}
+
+#navbar {
+  background-color: #333;
+  display: block;
+  overflow: auto;
+  width: 100%;
+}
+
+#navbar div {
+  margin: 0.5em 1em;
+}
+
+#navbar a {
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  font-size: 0.95em;
+  font-weight: bold;
+  margin: 0em 0.5em;
+  text-decoration: none;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
