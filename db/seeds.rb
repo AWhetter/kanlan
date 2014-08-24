@@ -5,9 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-Game.create( :name => "Counter Strike: Source", :url => "http://store.steampowered.com/app/240/" )
-Game.create( :name => "Planetside 2", :url => "http://store.steampowered.com/app/218230/" )
-Game.create( :name => "Left 4 Dead 2", :url => "http://store.steampowered.com/app/550/" )
-Game.create( :name => "Borderlands 2", :url => "http://store.steampowered.com/app/49520/" )
-Game.create( :name => "Team Fortress 2", :url => "http://store.steampowered.com/app/440/" )
