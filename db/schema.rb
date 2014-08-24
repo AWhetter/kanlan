@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824124635) do
+ActiveRecord::Schema.define(version: 20140824150512) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -30,6 +30,23 @@ ActiveRecord::Schema.define(version: 20140824124635) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "posts", force: true do |t|
+    t.integer  "game_id"
+    t.string   "params"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["game_id"], name: "index_posts_on_game_id"
+
+  create_table "posts_users", force: true do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
+  add_index "posts_users", ["post_id"], name: "index_posts_users_on_post_id"
+  add_index "posts_users", ["user_id"], name: "index_posts_users_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "username",            default: "", null: false

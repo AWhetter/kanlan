@@ -45,3 +45,6 @@ gem 'omniauth-steam', '~> 1.0.3'
 
 gem 'carrierwave', '~> 0.10.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
+
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'

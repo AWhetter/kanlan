@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+	root 'posts#index'
+
+  get 'posts/index'
+  get 'posts/new'
+  post 'posts/create'
+  post 'posts/add_user'
+  post 'posts/rm_user'
+
   resources :games
 
   devise_for :users, path_names: {sign_in: "log_in"}, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
