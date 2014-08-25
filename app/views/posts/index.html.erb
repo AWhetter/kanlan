@@ -1,6 +1,5 @@
 <div class="container-float">
 	<% @posts.each_slice(2) do |pair| %>
-		<div class="row">
 			<% pair.each do |post| %>
 				<div class="col-md-6">
 					<div class="panel panel-default">
@@ -29,6 +28,5 @@
 					</div>
 				</div>
 			<% end %>
-		</div>
 	<% end %>
 </div>
