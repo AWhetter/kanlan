@@ -1,0 +1,81 @@
+// Place all the styles related to the FloorPlan controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.floor_plan {
+	h1 {
+		clear: both;
+	}
+
+	.tables {
+		$border-thickness: 1px;
+		$table-spacing: 5px;
+		$row-spacing: 4px;
+		$font-size: 14px;
+		font-size: $font-size;
+
+		display:table;
+		border-collapse: collapse;
+
+		.seat {
+			text-align: center;
+			font-size: $font-size;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+
+		.end_table {
+			display: table-cell;
+			vertical-align:middle;
+			float:none;
+
+			&.left_end_table {
+				margin-right: -$border-thickness;
+			}
+
+			&.right_end_table {
+				margin-left: -$border-thickness;
+			}
+
+			.seat {
+				display: inline-block;
+				border: $border-thickness solid black;
+				width: 100%;
+			}
+
+			.seat:not(:first-child) {
+				margin-top: -$border-thickness * 2;
+			}
+		}
+
+		div {
+			display: table-cell;
+			vertical-align:middle;
+			float:none;
+
+			.table_rows {
+				display: table;
+				border-collapse: separate;
+				table-layout: fixed;
+				border-spacing: $table-spacing $row-spacing;
+				width: 100%;
+
+				.table_row {
+					display: table-row;
+
+					.real_table {
+						border: $border-thickness solid black;
+						display: table-cell;
+
+						.seat {
+							vertical-align: middle;
+							display: inline-block;
+							width: 48%;
+						}
+					}
+				}
+			}
+		}
+	}
+}

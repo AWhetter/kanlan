@@ -9,6 +9,19 @@ class User < ActiveRecord::Base
 
 	mount_uploader :image, ImageUploader
 
+	validates :table, presence: true
+	validates :seat, presence: true, uniqueness: {scope: :table}
+
+	validate do |user|
+		unless KanLan::TABLE_NAMES.include? user.table
+			user.errors.add(:table, 'must exist.')
+		else
+			unless KanLan::SEATS[user.table].include? user.seat
+				user.errors.add(:seat, 'must be on the table.')
+			end
+		end
+	end
+
 	def email_changed?
 		false
 	end

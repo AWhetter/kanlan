@@ -11,6 +11,12 @@
   <%= f.label :password_confirmation %>
 	<%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
 
+	<%= f.label :table %>
+	<%= f.select :table, KanLan::TABLE_NAMES, {}, class: "form-control" %>
+
+	<%= f.label :seat %>
+	<%= f.select :seat, KanLan::SEAT_NAMES, {}, class: "form-control" %>
+
   <%= f.label :current_password %>
 	<%= f.password_field :current_password, autocomplete: "off", placeholder: '(Needed to confirm changes)', class: "form-control" %><br />
 

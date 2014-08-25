@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'floor_plan/show'
+
   ActiveAdmin.routes(self)
 	root 'posts#index'
 

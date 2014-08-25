@@ -9,5 +9,11 @@
 
 	<%= f.password_field :password_confirmation, autocomplete: "off", required: true, class: "form-control", placeholder: "Password confirmation" %>
 
+	<%= f.label :table %>
+	<%= f.select :table, KanLan::TABLE_NAMES %>
+
+	<%= f.label :seat %>
+	<%= f.select :seat, KanLan::SEAT_NAMES %>
+
 	<%= button_tag "Sign up", type: :submit, name: :commit, class: "btn btn-lg btn-success btn-block" %>
 <% end %>
