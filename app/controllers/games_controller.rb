@@ -1,9 +1,17 @@
-class GamesController < InheritedResources::Base
-	before_filter :authenticate_admin!, only: [:edit, :update, :destroy]
-	before_filter :authenticate_user!, only: [:new, :create]
+class GamesController < ApplicationController
+	before_filter :authenticate_user!
+
+	def new
+		@game = Game.new
+	end
+
+	def create
+		@game = Game.new(game_params)
+		save_and_redirect @game, 'Successfuly created game.', posts_new_path
+	end
 
 	private
-	def permitted_params
-		params.permit(game: [:name, :url, :steam_app_id])
+	def game_params
+		params[:game].permit(:name, :url, :steam_app_id)
 	end
 end

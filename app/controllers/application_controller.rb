@@ -6,10 +6,21 @@ class ApplicationController < ActionController::Base
 	before_filter :configure_permitted_parameters, if: :devise_controller?
 
 	protected
-
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :password, :password_confirmation, :remember_me) }
 		devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :password, :remember_me) }
 		devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :password, :password_confirmation, :current_password) }
+	end
+
+	def save_and_redirect(resource, success_msg='Success.', redirect_path=root_path)
+		respond_to do |format|
+			if resource.save
+				format.html { redirect_to redirect_path, notice: success_msg }
+				format.json { render nothing: true, status: :created }
+			else
+				format.html { render :new }
+				format.json { render json: resource.errors, status: :unprocessable_entity }
+			end
+		end
 	end
 end

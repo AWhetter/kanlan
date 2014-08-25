@@ -1,2 +1,22 @@
-<h1>Post#new</h1>
-<p>Find me in app/views/post/new.html.erb</p>
+<%= form_for @post, url: posts_create_path do |f| %>
+	<h2>New Request</h2>
+	<% if @post.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+			<ul>
+				<% @post.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<%= f.label :game %> <%= link_to "Not listed? Add a new game", games_new_path %>
+	<%= f.collection_select :game_id, Game.order(name: :desc), :id, :name, {prompt: true}, {class: "form-control"} %>
+
+	<%= f.label :params, "Game Parameters" %>
+	<%= f.text_field :params, :placeholder => "eg GunGame on cs_office", class: "form-control" %><br />
+
+	<%= button_tag "Submit", type: :submit, name: :commit, class: "btn btn-lg btn-success btn-block" %>
+<% end %>

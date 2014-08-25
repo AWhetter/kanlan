@@ -1,5 +1,24 @@
-<h1>New game</h1>
+<%= form_for @game, url: games_create_path do |f| %>
+	<h2>New Game</h2>
 
-<%= render 'form' %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
 
-<%= link_to 'Back', games_path %>
+      <ul>
+      <% @game.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name, class: "form-control" %>
+	<%= f.label :url %>
+	<%= f.text_field :url, class: "form-control", placeholder: "(Optional)" %>
+	<%= f.label :steam_app_id %>
+	<%= f.number_field :steam_app_id, class: "form-control", placeholder: "(Optional)" %><br />
+
+	<%= button_tag "Submit", type: :submit, name: :commit, class: "btn btn-lg btn-success btn-block" %>
+<% end %>

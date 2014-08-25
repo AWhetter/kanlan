@@ -12,17 +12,18 @@ class PostsController < ApplicationController
 
   def create
 		@post = Post.new(post_params)
-		save_and_render 'Request was successfully posted.'
+		@post.users << current_user
+		save_and_redirect 'Request was successfully posted.'
   end
 
   def add_user
 		@post.users << current_user
-		save_and_render 'Successfully added you to the request.'
+		save_and_redirect 'Successfully added you to the request.'
   end
 
   def rm_user
 		@post.users.delete current_user
-		save_and_render 'Successfully removed you from the request.'
+		save_and_redirect 'Successfully removed you from the request.'
   end
 
 	private
@@ -30,15 +31,11 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 	end
 
-	def save_and_render(success_msg='Success.')
-		respond_to do |format|
-			if @post.save
-				format.html { redirect_to :index, notice: success_msg }
-				format.json { render nothing: true, status: :created }
-			else
-				format.html { render :new }
-				format.json { render json: @post.errors, status: :unprocessable_entity }
-			end
-		end
+	def post_params
+		params[:post].permit(:game_id, :params)
+	end
+
+	def save_and_redirect(*args)
+		super @post, *args
 	end
 end
