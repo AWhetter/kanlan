@@ -49,9 +49,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<%= link_to edit_user_registration_path, id: "profile_btn" do %>
-									<% if current_user.image_url %>
-										<%= image_tag current_user.image_url, id: "nav_profile_img" %>
-									<% end %>
+									<%= image_tag current_user.image_url, id: "nav_profile_img" %>
 									<%= current_user.username %>
 								<% end %>
 							</li>
