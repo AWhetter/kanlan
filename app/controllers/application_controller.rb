@@ -5,6 +5,19 @@ class ApplicationController < ActionController::Base
 
 	before_filter :configure_permitted_parameters, if: :devise_controller?
 
+	def authenticate_admin_user!
+		authenticate_user!
+		unless user_signed_in? and current_user.admin?
+			flash[:alert] = "That area is restricted to administrators only!"
+			redirect_to root_path
+		end
+	end
+
+	def current_admin_user
+		return nil unless user_signed_in? and current_user.admin?
+		current_user
+	end
+
 	protected
 	def configure_permitted_parameters
 		devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :password, :password_confirmation, :remember_me) }
