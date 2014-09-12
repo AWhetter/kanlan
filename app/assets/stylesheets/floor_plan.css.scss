@@ -22,13 +22,17 @@
 			font-size: $font-size;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			box-sizing: border-box;
 		}
 
+		.seat:hover {
+			background-color: #222222;
+			color: white;
+		}
 
 		.end_table {
 			display: table-cell;
 			vertical-align:middle;
-			float:none;
 
 			&.left_end_table {
 				margin-right: -$border-thickness;
@@ -65,13 +69,13 @@
 					display: table-row;
 
 					.real_table {
+						box-sizing: border-box;
 						border: $border-thickness solid black;
 						display: table-cell;
 
 						.seat {
-							vertical-align: middle;
-							display: inline-block;
-							width: 48%;
+							float: left;
+							width:50%;
 						}
 					}
 				}

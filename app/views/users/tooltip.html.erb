@@ -1,0 +1,21 @@
+<div class="steam_tooltip <%= @user_info[:simple_status_str] %>">
+<div>
+	<div class="playerAvatar medium <%= @user_info[:simple_status_str] %>">
+		<a href="<%= @user_info[:profile_url] %>" target="_blank">
+			<%= image_tag @user_info[:image], alt: nil %>
+		</a>
+	</div>
+</div>
+<div class="user_info">
+	<ul>
+		<li><%= @user_info[:username] %></li>
+		<% if @user_info[:in_game] %>
+			<li>is now playing</li>
+			<li><%= link_to @user_info[:playing][:name], "steam://run/#{@user_info[:playing][:id]}", class: "playing_game" %></li>
+		<% else %>
+			<li><%= @user_info[:simple_status_str].titleize %></li>
+		<% end %>
+		<li><a href="steam://friends/message/<%= params[:uid] %>">Send steam message</a></li>
+	</ul>
+</div>
+</div>
