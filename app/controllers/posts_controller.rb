@@ -3,7 +3,9 @@ class PostsController < ApplicationController
 	before_action :set_post, only: [:add_user, :rm_user]
 
   def index
-		@posts = Post.all.sort
+		@posts = Post.all
+		@posts = @posts.reject {|post| post.users.empty?}
+		@posts = @posts.sort {|a,b| b.users.length <=> a.users.length }
   end
 
   def new
