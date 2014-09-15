@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'steam_app/suggest'
+  get 'steam_app/:id' => 'steam_app#show'
+
   get 'floor_plan/show'
 
   ActiveAdmin.routes(self)

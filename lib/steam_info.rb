@@ -1,7 +1,15 @@
 module SteamInfo
-	# TODO: Maybe this should go into the database for safe keeping
-	#apps = JSON.parse(open('http://api.steampowered.com/ISteamApps/GetAppList/v2').read)['applist']['apps']
-	#APPS = Hash[apps.collect { |v| [v['appid'], v['name']] }]
+	module AppInfo
+		def self.init_db
+			SteamApp.delete_all
+			apps = JSON.parse(open('http://api.steampowered.com/ISteamApps/GetAppList/v2').read)['applist']['apps']
+			ActiveRecord::Base.transaction do
+				apps.each do |app|
+					SteamApp.create(id: app['appid'], name: app['name'])
+				end
+			end
+		end
+	end
 
 	module UserInfo
 		def self.get(uids, *param_list)

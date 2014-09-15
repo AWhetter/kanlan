@@ -48,3 +48,5 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+
+gem 'whenever', '~> 0.9.2'
