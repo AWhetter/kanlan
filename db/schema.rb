@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914180901) do
+ActiveRecord::Schema.define(version: 20141004164138) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20140914180901) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "play_sessions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "steam_app_id"
+    t.string   "game_name"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "play_sessions", ["user_id"], name: "index_play_sessions_on_user_id"
 
   create_table "posts", force: true do |t|
     t.integer  "game_id"
