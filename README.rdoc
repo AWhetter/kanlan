@@ -1,28 +1,13 @@
-== README
+== KanLan
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+KanLan is a self-hosting, Ruby on Rails application designed to help people find other people to play games with at LAN parties
 
-Things you may want to cover:
+=== Configuration ===
+Put your steam web API key in a STEAM_WEB_API_KEY environment variable.
+Make sure cron is running for the steam API caching to work.
+Configure the floor plan in floor_plan.yml.
+In development mode the Steam App list is not saved automatically. Run `rake db:seed`. You may also want to refresh it every now and again. In production the list is refreshed on startup.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+=== TODO ===
+Make this file pretty.
+Maybe it would be easier to just populate Games from steam and autocomplete on the post form?
