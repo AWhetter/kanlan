@@ -1,3 +1,12 @@
 // Place all the styles related to the post controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1.now_playing {
+	clear: both;
+}
+
+p.now_playing {
+	font-style: italic;
+	color: grey;
+}

@@ -1,32 +1,69 @@
+<% def users_list(users) %>
+	<% users.each do |user| %>
+		<% if user.provider == "steam" %>
+			<li class="list-group-item" data-html=true data-placement="left" data-ajaxload="/users/<%= user.uid %>/tooltip">
+		<% else %>
+			<li class="list-group-item">
+		<% end %>
+			<%= user.username %>
+			<i>(Sitting on <%= user.table %> at <%= user.seat %>)</i>
+		</li>
+	<% end %>
+<% end %>
+
 <div class="container-float">
-	<% @posts.each_slice(2) do |pair| %>
-			<% pair.each do |post| %>
-				<div class="col-md-6">
-					<div class="panel panel-default">
-						<div class="panel-heading clearfix">
-							<div class="pull-left">
-								<h1 class="panel-title"><%= post.game.name %></h1>
-								<% unless post.params.nil? or post.params.empty? %>
-									<h2 class="panel-subtitle"><%= post.params %></h2>
-								<% end %>
-							</div>
-							<% if user_signed_in? %>
-								<div class="pull-right">
-									<% if post.users.include? current_user %>
-										<%= button_to "Remove me", {action: :rm_user, id: post.id}, method: :delete, form_class: "edit_post_users_form", class: "btn btn-default btn-sm" %>
-									<% else %>
-										<%= button_to "Add me", {action: :add_user, id: post.id}, method: :post, form_class: "edit_post_users_form", class: "btn btn-default btn-sm" %>
-									<% end %>
-								</div>
+	<% @posts.each do |post| %>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<div class="pull-left">
+						<h1 class="panel-title"><%= post.game.name %></h1>
+						<% unless post.params.nil? or post.params.empty? %>
+							<h2 class="panel-subtitle"><%= post.params %></h2>
+						<% end %>
+					</div>
+					<% if user_signed_in? %>
+						<div class="pull-right">
+							<% if post.users.include? current_user %>
+								<%= button_to "Remove me", {action: :rm_user, id: post.id}, method: :delete, form_class: "edit_post_users_form", class: "btn btn-default btn-sm" %>
+							<% else %>
+								<%= button_to "Add me", {action: :add_user, id: post.id}, method: :post, form_class: "edit_post_users_form", class: "btn btn-default btn-sm" %>
 							<% end %>
 						</div>
-						<ul class="list-group">
-							<% post.users.each do |user| %>
-								<li class="list-group-item"><%= user.username %></li>
-							<% end %>
+					<% end %>
+				</div>
+				<ul class="list-group">
+					<% users_list post.users %>
+				</ul>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+<% unless @now_playing.empty? %>
+	<h1 class="now_playing">What is being played now?</h1>
+	<% if @updated_at %>
+		<p class="now_playing">(Last updated <%= distance_of_time_in_words @updated_at, DateTime.now %> ago)</p>
+	<% end %>
+	<% cache('now_playing') do %>
+		<div class="now_playing container-float panel-group">
+			<% @now_playing.each_with_index do |(game_name, players), i| %>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading clearfix" data-toggle="collapse" data-target="#players<%= i %>">
+							<div class="pull-left">
+								<h1 class="panel-title"><%= game_name %></h1>
+							</div>
+							<div class="pull-right">
+								<span class="badge"><%= pluralize players.length, "Player" %></span>
+							</div>
+						</div>
+						<ul id="players<%= i %>" class="list-group collapse">
+							<% users_list players %>
 						</ul>
 					</div>
 				</div>
 			<% end %>
+		</div>
 	<% end %>
-</div>
+<% end %>

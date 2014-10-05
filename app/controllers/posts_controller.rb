@@ -6,6 +6,9 @@ class PostsController < ApplicationController
 		@posts = Post.all
 		@posts = @posts.reject {|post| post.users.empty?}
 		@posts = @posts.sort {|a,b| b.users.length <=> a.users.length }
+
+		@now_playing = Rails.cache.fetch(:now_playing) || []
+		@updated_at = Rails.cache.fetch :steam_cache_updated_at
   end
 
   def new

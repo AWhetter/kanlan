@@ -167,17 +167,30 @@ form .form-heading,
 			padding-right: 0;
 		}
 	}
+}
 
-	.tooltip {
-		margin-top: 0;
-		width: auto;
+.tooltip {
+	text-align: center;
+	margin: 0 !important;
+	width: auto;
 
-		.tooltip-arrow {
-			margin-top: 3px;
-		}
+	.tooltip-arrow {
+		margin-top: 3px;
+	}
 
-		.tooltip-inner {
-			max-width: none;
-		}
+	.tooltip-inner {
+		max-width: none;
+	}
+
+	div {
+		display: table-cell;
+		vertical-align: middle;
+		float: none;
+	}
+}
+
+.now_playing .panel {
+	h1 {
+		padding-top: 0;
 	}
 }
