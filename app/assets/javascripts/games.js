@@ -49,7 +49,7 @@ window.addEventListener('load', function () {
 	var game_suggestions = new Bloodhound({
 		datumTokenizer: Bloodhound.tokenizers.whitespace,
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
-		remote: 'http://127.0.0.1:3000/steam_app/suggest?term=%QUERY'
+		remote: '/steam_app/suggest?term=%QUERY'
 	});
 	game_suggestions.initialize();
 	$('#game_name')
