@@ -42,12 +42,17 @@ module SteamInfo
 					remote_user_info(uid)[0]
 				end
 
-				to_return[uid] = {}
-				param_list.each do |param|
-					to_return[uid][param] = UserInfo.method(param).call user_info
-				end
+				to_return[uid] = get_from_info_hash user_info, *param_list
 			end
 
+			to_return
+		end
+
+		def self.get_from_info_hash(user_info, *param_list)
+			to_return = {}
+			param_list.each do |param|
+				to_return[param] = UserInfo.method(param).call user_info
+			end
 			to_return
 		end
 

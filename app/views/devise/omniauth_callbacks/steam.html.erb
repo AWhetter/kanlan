@@ -1,0 +1,28 @@
+<%= form_for(@user, url: users_steam_sign_up_path, html: {class: "form-signin form-compact", role: "form"}) do |f| %>
+	<h2 class="form-signin-heading">Sign up</h2>
+	<%= devise_error_messages! %>
+
+	<div class="steam_profile_summary">
+		<div>
+			<div class="playerAvatar medium <%= @user_info[:simple_status_str] %>">
+				<a href="<%= @user_info[:profile_url] %>" target="_blank">
+					<%= image_tag @user_info[:image], alt: nil %>
+				</a>
+			</div>
+		</div>
+		<div class="user_info">
+			<ul>
+				<li>Logging in as:</li>
+				<li><%= @user_info[:username] %></li>
+			</ul>
+		</div>
+	</div>
+
+	<%= f.label :table %>
+	<%= f.select :table, KanLan::TABLE_NAMES %>
+
+	<%= f.label :seat %>
+	<%= f.select :seat, KanLan::SEAT_NAMES %>
+
+	<%= button_tag "Sign up", type: :submit, name: :commit, class: "btn btn-lg btn-success btn-block" %>
+<% end %>

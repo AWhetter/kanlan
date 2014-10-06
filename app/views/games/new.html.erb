@@ -17,7 +17,7 @@
 	<%= f.text_field :name, class: "form-control", placeholder: "(Non-steam games allowed)" %>
 	<%= f.label :url %>
 	<%= f.text_field :url, class: "form-control", placeholder: "(Optional)" %>
-	<%= f.label :steam_app_id %>
+	<%= f.label :steam_app_id, "Steam App ID" %>
 	<%= f.number_field :steam_app_id, class: "form-control", placeholder: "(Optional)" %><br />
 
 	<%= button_tag "Submit", type: :submit, name: :commit, class: "btn btn-lg btn-success btn-block" %>

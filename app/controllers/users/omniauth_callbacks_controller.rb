@@ -10,14 +10,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 			return
 		end
 
-		@user = User.from_omniauth(request.env["omniauth.auth"])
-
+		@user = User.from_omniauth(request.env["omniauth.auth"].except(:extra))
 		if @user.persisted?
 			sign_in_and_redirect @user
 			set_flash_message(:notice, :success, :kind => "Steam") if is_navigational_format?
 		else
-			session["devise.steam_data"] = request.env["omniauth.auth"]
-			redirect_to new_user_registration_url
+			@user_info = SteamInfo::UserInfo::get_from_info_hash(request.env["omniauth.auth"][:extra][:raw_info], :simple_status_str, :image, :username, :profile_url)
+			session["devise.steam_data"] = request.env["omniauth.auth"].except(:extra)
 		end
 	end
 end

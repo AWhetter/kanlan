@@ -14,10 +14,10 @@ class User < ActiveRecord::Base
 
 	validate do |user|
 		unless KanLan::TABLE_NAMES.include? user.table
-			user.errors.add(:table, 'must exist.')
+			user.errors.add(:table, 'must exist')
 		else
 			unless KanLan::SEATS[user.table].include? user.seat
-				user.errors.add(:seat, 'must be on the table.')
+				user.errors.add(:seat, 'must be on the table')
 			end
 		end
 	end
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 	end
 
 	def self.from_omniauth(auth)
-		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+		where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
 			user.username = auth.info.nickname
 			user.password = Devise.friendly_token[0,20]
 			user.remote_image_url = auth.info.image

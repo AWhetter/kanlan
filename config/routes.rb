@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
 	get 'users/:uid/tooltip' => 'users#tooltip'
   devise_for :users, path_names: {sign_in: "log_in"}, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+	post 'users/steam_sign_up' => 'users#signup_from_steam'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
