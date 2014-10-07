@@ -45,7 +45,7 @@
 	<% if @updated_at %>
 		<p class="now_playing">(Last updated <%= distance_of_time_in_words @updated_at, DateTime.now %> ago)</p>
 	<% end %>
-	<% cache('now_playing') do %>
+	<% cache 'now_playing', skip_digest: true do %>
 		<div class="now_playing container-float panel-group">
 			<% @now_playing.each_with_index do |(game_name, players), i| %>
 				<div class="col-md-6">
