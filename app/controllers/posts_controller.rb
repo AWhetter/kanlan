@@ -17,6 +17,12 @@ class PostsController < ApplicationController
 
   def create
 		@post = Post.new(post_params)
+		if !@post.valid? and @post.errors[:params]
+			# Find the pre-existing post
+			post = Post.where(post_params).first
+			# If nil let save_and_redirect handle the validation errors
+			@post = post unless post.nil?
+		end
 		@post.users << current_user
 		save_and_redirect 'Request was successfully posted.'
   end
