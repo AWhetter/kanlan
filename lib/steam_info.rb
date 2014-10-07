@@ -105,6 +105,7 @@ module SteamInfo
 						next
 					else
 						current_session.finished_at = DateTime.now
+						current_session.save
 					end
 				end
 
