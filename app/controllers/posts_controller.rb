@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 		@posts = @posts.sort {|a,b| b.users.length <=> a.users.length }
 
 		@now_playing = Rails.cache.fetch(:now_playing) || []
-		@updated_at = Rails.cache.fetch :steam_cache_updated_at
+		@updated_at = Rails.cache.fetch :sessions_updated_at
   end
 
   def new
