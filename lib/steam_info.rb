@@ -98,7 +98,7 @@ module SteamInfo
 					next
 				end
 
-				current_session = PlaySession.where(user: user).order(:created_at).last
+				current_session = PlaySession.where(user: user, finished_at: nil).order(:created_at).last
 				if current_session
 					# If in the same session
 					if current_session.steam_app_id == game_info[:id] and current_session.game_name == game_info[:name]
