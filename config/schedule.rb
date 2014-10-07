@@ -21,6 +21,5 @@
 
 every 3.minutes do
 	job_type :steam_job, "cd :path && STEAM_WEB_API_KEY=:steam_web_api_key bin/rails runner -e :environment ':task' :output"
-	steam_job "SteamInfo::UserInfo::cache_all"
-	steam_job "SteamInfo::SessionInfo::refresh_all_sessions"
+	steam_job "SteamInfo::UserInfo::cache_all; SteamInfo::SessionInfo::refresh_all_sessions"
 end

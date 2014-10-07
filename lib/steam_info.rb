@@ -133,7 +133,7 @@ module SteamInfo
 			end
 
 			Rails.cache.write :now_playing, now_playing
-			Rails.cache.write :sessions_updated_at, DateTime.now
+			Rails.cache.write :sessions_updated_at, Rails.cache.fetch(:steam_cache_updated_at)
 			ActionController::Base.new.expire_fragment('now_playing')
 		end
 	end
