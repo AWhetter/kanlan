@@ -11,11 +11,11 @@
 		<li><%= @user_info[:username] %></li>
 		<% if @user_info[:in_game] %>
 			<li>is now playing</li>
-			<li><%= link_to @user_info[:playing][:name], "steam://run/#{@user_info[:playing][:id]}", class: "playing_game" %></li>
+			<li><%= link_to @user_info[:playing][:name], SteamInfo::GameInfo::run_uri_from_id(@user_info[:playing][:id]), class: "playing_game" %></li>
 		<% else %>
 			<li><%= @user_info[:simple_status_str].titleize %></li>
 		<% end %>
-		<li><a href="steam://friends/message/<%= params[:uid] %>">Send steam message</a></li>
+		<li><%= link_to "Send steam message", SteamInfo::UserInfo::message_uri_from_uid(params[:uid]) %></li>
 	</ul>
 </div>
 </div>

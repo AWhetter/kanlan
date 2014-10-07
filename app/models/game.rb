@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
 	has_many :posts, dependent: :destroy
 
 	before_validation do
-		url = "http://store.steampowered.com/app/#{steam_app_id}/" unless steam_app_id.nil?
+		url = SteamInfo::GameInfo::url_from_id(steam_app_id) unless steam_app_id.nil?
 	end
 
 	validates :name, presence: true, uniqueness: true

@@ -12,6 +12,10 @@ module SteamInfo
 	end
 
 	module UserInfo
+		def self.message_uri_from_uid(uid)
+			"steam://friends/message/#{uid}"
+		end
+
 		def self.remote_user_info(*uids)
 			Rails.logger.debug "Getting remote information about #{uids}"
 			to_return = []
@@ -56,6 +60,7 @@ module SteamInfo
 			to_return
 		end
 
+		# Param methods
 		def self.in_game(user_info)
 			!user_info['gameextrainfo'].nil?
 		end
@@ -129,6 +134,16 @@ module SteamInfo
 
 			Rails.cache.write :now_playing, now_playing
 			ActionController::Base.new.expire_fragment('now_playing')
+		end
+	end
+
+	module GameInfo
+		def self.url_from_id(id)
+			"http://store.steampowered.com/app/#{id}/"
+		end
+
+		def self.run_uri_from_id(id)
+			"steam://run/#{id}"
 		end
 	end
 end
