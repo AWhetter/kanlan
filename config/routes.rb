@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 	post 'games/create'
 
 	get 'users/:uid/tooltip' => 'users#tooltip'
-  devise_for :users, path_names: {sign_in: "log_in"}, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, path_names: {sign_in: "log_in"}, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'registrations' }
 	post 'users/steam_sign_up' => 'users#signup_from_steam'
 
   # The priority is based upon order of creation: first created -> highest priority.
